@@ -6,7 +6,7 @@ STOPSIGNAL SIGTERM
 
 ####Labels####
 LABEL maintainer="vinanrra"
-LABEL build_version="version: 0.2.1"
+LABEL build_version="version: 0.2.2"
 
 ####Environments####
 
@@ -65,6 +65,13 @@ RUN dpkg --add-architecture i386 && \
 		cpio \
 		libsdl2-2.0-0:i386 \
 		xz-utils
+
+
+# install node 16 and the LinuxGSM dependency GameDig
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - ; \
+	apt update && apt install -y nodejs \
+	npm install gamedig -g
+
 
 # Install latest su-exec
 RUN  set -ex; \
